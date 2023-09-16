@@ -1,17 +1,28 @@
+import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, FlatList, SafeAreaView } from "react-native";
 import ListItem from "./components/ListItem";
-import articles from "./dummies/articles.json";
+import axios from "axios";
+import Constants from "expo-constants";
+
+const URL = `https://newsapi.org/v2/top-headlines?country=jp&category=business&apiKey=${Constants.expoConfig.extra.newsApiKey}`;
 
 export default function App() {
-  const items = articles.map((article, index) => (
-    <ListItem
-      key={index.toString()}
-      imageUrl={article.urlToImage}
-      title={article.title}
-      auther={article.author}
-    />
-  ));
+  const [articles, setArticles] = useState([]);
+
+  const fetchArticles = async () => {
+    try {
+      const res = await axios.get(URL);
+      // console.log(res.data.articles);
+      setArticles(res.data.articles);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     flex: 1,
-    padding: 10,
+    padding: 1,
     justifyContent: "space-between",
   },
   mainText: {
