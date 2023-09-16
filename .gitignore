@@ -35,4 +35,4 @@ yarn-error.*
 *.tsbuildinfo
 
 #config
-app.json
+/app.json
