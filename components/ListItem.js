@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Text, View } from "react-native";
+import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 
 const ListItem = (props) => {
   const sampleText = `The <Text> element is unique relative 
@@ -6,21 +6,23 @@ const ListItem = (props) => {
      layout but using text layout. This means that elements inside of a <Text> 
      are no longer rectangles, but wrap when they see the end of the line.`;
   return (
-    <View style={styles.itemContainer}>
-      <View style={styles.leftContainer}>
-        <Image
-          style={{ width: 100, height: 100 }}
-          // source={{ uri: "https://picsum.photos/id/10/300/300" }}
-          source={{ uri: props.imageUrl }}
-        />
+    <TouchableOpacity style={styles.itemContainer} onPress={props.onPress}>
+      <View style={styles.itemContainer}>
+        <View style={styles.leftContainer}>
+          <Image
+            style={{ width: 100, height: 100 }}
+            // source={{ uri: "https://picsum.photos/id/10/300/300" }}
+            source={{ uri: props.imageUrl }}
+          />
+        </View>
+        <View style={styles.rightContainer}>
+          <Text numberOfLines={3} style={styles.mainText}>
+            {props.title}
+          </Text>
+          <Text style={styles.subText}>{props.auther}</Text>
+        </View>
       </View>
-      <View style={styles.rightContainer}>
-        <Text numberOfLines={3} style={styles.mainText}>
-          {props.title}
-        </Text>
-        <Text style={styles.subText}>{props.auther}</Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     backgroundColor: "white",
-    marginVertical: 5,
+    marginVertical: 1,
   },
   leftContainer: {
     width: 100,
